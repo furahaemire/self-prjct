@@ -14,8 +14,8 @@ const router = createRouter({
       name: 'home',
       component: () => import('../pages/AhabanzaPage.vue'),
       meta: {
-        title: 'Iga gukoresha vue js',
-        description: 'reba kandi wege gukora website ukoresheje html na css.'
+        title: 'Start learning using  || The skills media',
+        description: 'In this website you will learn language using The skills media.'
       }
     },
     {
