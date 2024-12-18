@@ -1,35 +1,52 @@
 <template>
-	<div>
-	  <h1>Register</h1>
+	<div class="container mt-5">
+	  <h3>Register</h3>
 	  <form @submit.prevent="register">
-		<input v-model="username" placeholder="Username" required />
-		<input v-model="password" type="password" placeholder="Password" required />
-		<button>Register</button>
+		<div class="mb-3">
+		  <label for="username" class="form-label">Username</label>
+		  <input
+			v-model="username"
+			type="text"
+			id="username"
+			class="form-control"
+			required
+		  />
+		</div>
+		<div class="mb-3">
+		  <label for="password" class="form-label">Password</label>
+		  <input
+			v-model="password"
+			type="password"
+			id="password"
+			class="form-control"
+			required
+		  />
+		</div>
+		<button class="btn btn-primary" type="submit">Register</button>
 	  </form>
 	</div>
   </template>
   
   <script>
-  import axios from 'axios';
+  import axios from "axios";
   
   export default {
 	data() {
 	  return {
-		username: '',
-		password: '',
+		username: "",
+		password: "",
 	  };
 	},
 	methods: {
 	  async register() {
 		try {
-		  await axios.post('http://localhost:5000/api/register', {
+		  const response = await axios.post("http://localhost:5000/register", {
 			username: this.username,
 			password: this.password,
 		  });
-		  alert('Registration successful');
-		  this.$router.push('/');
+		  alert(response.data);
 		} catch (error) {
-		  alert('Error registering');
+		  alert(error.response.data);
 		}
 	  },
 	},

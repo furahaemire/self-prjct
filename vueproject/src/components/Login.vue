@@ -1,38 +1,56 @@
 <template>
-    <div>
-      <h1>Login</h1>
-      <form @submit.prevent="login">
-        <input v-model="username" placeholder="Username" required />
-        <input v-model="password" type="password" placeholder="Password" required />
-        <button>Login</button>
-      </form>
-    </div>
+	<div class="container mt-5">
+	  <h3>Login</h3>
+	  <form @submit.prevent="login">
+		<div class="mb-3">
+		  <label for="username" class="form-label">Username</label>
+		  <input
+			v-model="username"
+			type="text"
+			id="username"
+			class="form-control"
+			required
+		  />
+		</div>
+		<div class="mb-3">
+		  <label for="password" class="form-label">Password</label>
+		  <input
+			v-model="password"
+			type="password"
+			id="password"
+			class="form-control"
+			required
+		  />
+		</div>
+		<button class="btn btn-primary" type="submit">Login</button>
+	  </form>
+	</div>
   </template>
   
   <script>
-  import axios from 'axios';
+  import axios from "axios";
   
   export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-      };
-    },
-    methods: {
-      async login() {
-        try {
-          const response = await axios.post('http://localhost:5000/api/login', {
-            username: this.username,
-            password: this.password,
-          });
-          alert('Login successful');
-          console.log('Token:', response.data.token);
-        } catch (error) {
-          alert('Invalid credentials');
-        }
-      },
-    },
+	data() {
+	  return {
+		username: "",
+		password: "",
+	  };
+	},
+	methods: {
+	  async login() {
+		try {
+		  const response = await axios.post("http://localhost:5000/login", {
+			username: this.username,
+			password: this.password,
+		  });
+		  alert("Login successful!");
+		  localStorage.setItem("token", response.data.token);
+		} catch (error) {
+		  alert(error.response.data);
+		}
+	  },
+	},
   };
   </script>
   
